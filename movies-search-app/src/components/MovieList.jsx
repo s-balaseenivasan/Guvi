@@ -26,12 +26,6 @@ export default function MovieList({
   </div>
 ))}
 
-       {/* <div className='grid grid-cols-5 items-center px-5 gap-3 '>
-        {Movies.length > 0 && Movies.map((movie,index)=>(
-            <span key={index} ><MoviesCard Movie={movie}/></span>
-            
-        ))}
-       </div> */}
 
     </div>
 

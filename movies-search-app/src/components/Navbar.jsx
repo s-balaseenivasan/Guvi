@@ -3,6 +3,7 @@ import InputText from './InputText'
 
 
 
+
 export default function Navbar({
   cb=()=>{},
   onSubmit=()=>{}
