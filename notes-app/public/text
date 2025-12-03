@@ -1,0 +1,27 @@
+const createNote = (note) => {
+    setNotes([{ id: Date.now(), pinned: false, archived: false, trashed: false, ...note }, ...notes]);
+  };
+
+  const updateNote = (id, updatedNote) => {
+    setNotes(notes.map(n => n.id === id ? { ...n, ...updatedNote } : n));
+  };
+
+  const deleteNote = (id) => {
+    setNotes(notes.map(n => n.id === id ? { ...n, trashed: true } : n));
+  };
+
+  const permanentlyDelete = (id) => {
+    setNotes(notes.filter(n => n.id !== id));
+  };
+
+  const restoreNote = (id) => {
+    setNotes(notes.map(n => n.id === id ? { ...n, trashed: false } : n));
+  };
+
+  const archiveNote = (id) => {
+    setNotes(notes.map(n => n.id === id ? { ...n, archived: true } : n));
+  };
+
+  const pinNote = (id) => {
+    setNotes(notes.map(n => n.id === id ? { ...n, pinned: !n.pinned } : n));
+  };
