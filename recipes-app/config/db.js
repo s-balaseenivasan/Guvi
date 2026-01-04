@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const URL = "mongodb+srv://balaseenivasan_db_user:kS709zIYmrQSadS7@guvi.d3gzfts.mongodb.net/?appName=Guvi";
+const URL = process.env.MONGO_URI || "mongodb://localhost:27017/recipe";
 
 const connectDB = async () => {
     try {
         await mongoose.connect(URL);
-        console.log("MongoDB Connected");
+        console.log("MongoDB Connected",URL);
     }
     catch (error) {
         console.log(error);
