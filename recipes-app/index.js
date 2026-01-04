@@ -1,9 +1,8 @@
 const express=require("express");
-const connectDB=require("./config/db");
 const recipeController=require("./controllers/recipeController")
 const dotenv = require("dotenv");
 dotenv.config();
-
+const connectDB=require("./config/db");
 const PORT = process.env.PORT || 8000;
 
 
