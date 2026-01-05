@@ -20,7 +20,13 @@ async function forgotpassword(req, res) {
 
 
     const resetLink = `${url}/reset-password/${token}`;
-    await sendMail(email, resetLink);
+    try {
+        await sendMail(email, resetLink);
+    } catch (err) {
+        console.error("Error sending email:", err);
+        return res.status(500).json({ message: "Failed to send email. Please try again later." });
+    }
+
 
     res.json({ message: "Reset link sent to email" });
 }
