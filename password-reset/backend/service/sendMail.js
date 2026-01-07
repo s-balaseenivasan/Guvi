@@ -15,7 +15,7 @@ const sendMail = async (email, link) => {
   });
 
   await transporter.sendMail({
-    from: process.env.SENDINBLUE_EMAIL,
+    from: process.env.EMAIL,
     to: email,
     subject: "Password Reset",
     html: `
