@@ -6,14 +6,12 @@ function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const server_url = import.meta.env.VITE_SERVER_URL;
-
     const handleRegister = async (e) => {
         e.preventDefault();
 
         try {
             const res = await axios.post(
-                `${server_url}/api/auth/register`,
+                "https://password.upgradenow.online/api/auth/register",
                 { email, password }
             );
 

@@ -6,7 +6,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const server_url=import.meta.env.VITE_SERVER_URL;
 
   function handleEmailChange(e){
     setEmail(e);
@@ -23,7 +22,7 @@ function Login() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${server_url}/api/auth/login`,
+        "https://password.upgradenow.online/api/auth/login",
         { email, password }
       );
 

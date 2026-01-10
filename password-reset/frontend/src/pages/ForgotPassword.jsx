@@ -4,26 +4,36 @@ import { Link } from "react-router-dom";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(""); 
-  const server_url = import.meta.env.VITE_SERVER_URL;
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false); 
 
-  const submit = async () => {
-    if (!email || !email.includes('@')) {
+  const submit = async (e) => {
+    e.preventDefault();  
+    if (!email) {
+      setMessage("Please enter an email address.");
+      return;
+    }
+
+   
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
       setMessage("Please enter a valid email address.");
       return;
     }
+
+    setLoading(true); 
     try {
-      await axios.post(`${server_url}/api/auth/forgot-password`, { email });
-      setMessage("Password reset link sent.");
+      const response = await axios.post(
+        "https://password.upgradenow.online/api/auth/forgot-password",
+        { email }
+      );
+      setMessage(response.data.message || "Password reset link sent.");
     } catch (err) {
       setMessage(err.response?.data?.message || "User not found.");
+    } finally {
+      setLoading(false); 
     }
   };
-  function handleEmailChange(e){
-    setEmail(e);
-    setMessage("");
-
-  }
 
   return (
     <div className="container mt-5">
@@ -32,22 +42,30 @@ function ForgotPassword() {
           <div className="card p-4 shadow">
             <h3 className="mb-3 text-center">Forgot Password</h3>
 
-           
             {message && (
               <div className="alert alert-info text-center">
                 {message}
               </div>
             )}
-            <input type="email" required className="form-control" value={email}
+
+            
+            <input
+              type="email"
+              className="form-control"
+              required
               placeholder="Enter Email"
-              onChange={(e) => handleEmailChange(e.target.value)}/>
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
             <button
               className="btn btn-primary mt-3 w-100"
               onClick={submit}
+              disabled={loading}
             >
-              Send Reset Link
+              {loading ? "Sending..." : "Send Reset Link"}
             </button>
+
 
             <div className="text-center mt-3">
               <Link to="/login">Back to Login</Link>

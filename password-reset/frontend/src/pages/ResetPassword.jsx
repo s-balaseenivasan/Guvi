@@ -8,11 +8,10 @@ function ResetPassword() {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState(""); // State to handle messages
     const navigate = useNavigate();
-    const server_url = import.meta.env.VITE_SERVER_URL;
 
     const submit = async () => {
         try {
-            await axios.post(`${server_url}/api/auth/reset-password/${token}`, {
+            await axios.post(`https://password.upgradenow.online/api/auth/reset-password/${token}`, {
                 password,
             });
             setMessage("Password updated successfully");

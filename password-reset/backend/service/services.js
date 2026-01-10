@@ -5,11 +5,7 @@ const sendMail = require("../service/sendMail");
 
 async function forgotpassword(req, res) {
     const { email } = req.body;
-    console.log(email);
-    
-
     const user = await User.findOne({ email });
-    console.log(user);
     
     if (!user) {
         return res.status(404).json({ message: "User not found", email });
@@ -24,8 +20,6 @@ async function forgotpassword(req, res) {
 
 
     const resetLink = `${website}/reset-password/${token}`;
-    console.log(resetLink);
-    
     try {
         await sendMail(email, resetLink);
         res.json({ message: "Reset link sent to email" });
