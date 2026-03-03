@@ -25,6 +25,8 @@ const userSchema = new mongoose.Schema(
     },
     addresses: [addressSchema],
     savedPaymentMethods: [{ type: String }],
+    passwordResetToken: String,
+    passwordResetExpires: Date,
   },
   { timestamps: true }
 );

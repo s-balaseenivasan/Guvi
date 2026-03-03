@@ -9,13 +9,18 @@ connectDB();
 
 const app = express();
 
-const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  'http://localhost:5173',
-  'http://localhost:5174',
-  'http://localhost:5175',
-].filter(Boolean);
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+const allowedOrigins = [process.env.FRONTEND_URL].filter(Boolean);
+app.use(cors({
+  origin: (origin, cb) => {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return cb(null, true);
+    // Allow any localhost port for local development
+    if (/^http:\/\/localhost:\d+$/.test(origin)) return cb(null, true);
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    cb(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+}));
 app.use(express.json());
 
 // SEC FIX: Rate-limit auth routes — max 20 requests per 15 min per IP

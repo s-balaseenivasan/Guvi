@@ -114,6 +114,12 @@ const Login = () => {
               </div>
             </div>
 
+            <div className="text-right">
+              <Link to="/forgot-password" className="text-sm text-primary-600 hover:text-primary-700 hover:underline">
+                Forgot password?
+              </Link>
+            </div>
+
             <button disabled={loading} className="btn-primary w-full !py-3 text-base" type="submit">
               {loading ? 'Signing in…' : (
                 <span className="flex items-center gap-2">Sign In <FiArrowRight /></span>

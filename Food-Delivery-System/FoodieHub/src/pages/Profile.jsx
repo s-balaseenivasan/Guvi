@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   FiCreditCard,
   FiEdit2,
+  FiLock,
   FiMapPin,
   FiPlus,
   FiSave,
@@ -39,6 +40,11 @@ const ProfilePage = () => {
   // ── Feedback ──────────────────────────────────────────────────────────────
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  // ── Change password ───────────────────────────────────────────────────────
+  const [showChangePwd, setShowChangePwd] = useState(false);
+  const [pwdForm, setPwdForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
+  const [pwdSaving, setPwdSaving] = useState(false);
 
   // ── Payment history ───────────────────────────────────────────────────────
   const [payments, setPayments] = useState(null);
@@ -125,6 +131,30 @@ const ProfilePage = () => {
       flash(err.message || 'Failed to remove address', true);
     } finally {
       setAddrSaving(false);
+    }
+  };
+
+  // ── Change password ───────────────────────────────────────────────────────
+  const handleChangePassword = async () => {
+    if (!pwdForm.currentPassword || !pwdForm.newPassword || !pwdForm.confirmPassword) {
+      flash('All password fields are required', true); return;
+    }
+    if (pwdForm.newPassword !== pwdForm.confirmPassword) {
+      flash('New passwords do not match', true); return;
+    }
+    if (pwdForm.newPassword.length < 6) {
+      flash('New password must be at least 6 characters', true); return;
+    }
+    setPwdSaving(true);
+    try {
+      await authAPI.changePassword({ currentPassword: pwdForm.currentPassword, newPassword: pwdForm.newPassword });
+      flash('Password changed successfully!');
+      setShowChangePwd(false);
+      setPwdForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+    } catch (err) {
+      flash(err.message || 'Failed to change password', true);
+    } finally {
+      setPwdSaving(false);
     }
   };
 
@@ -217,6 +247,69 @@ const ProfilePage = () => {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* ── Change Password ──────────────────────────────────────────────── */}
+        <section className="card space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="flex items-center gap-2 text-lg font-semibold">
+              <FiLock className="text-primary-600" /> Change Password
+            </h2>
+            {!showChangePwd && (
+              <button onClick={() => setShowChangePwd(true)} className="btn-secondary text-sm">
+                Change
+              </button>
+            )}
+          </div>
+
+          {showChangePwd && (
+            <div className="space-y-3">
+              <div>
+                <label className="mb-1 block text-sm font-medium text-slate-700">Current Password</label>
+                <input
+                  className="input-field"
+                  type="password"
+                  placeholder="••••••••"
+                  value={pwdForm.currentPassword}
+                  onChange={(e) => setPwdForm((f) => ({ ...f, currentPassword: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm font-medium text-slate-700">New Password</label>
+                <input
+                  className="input-field"
+                  type="password"
+                  placeholder="Min. 6 characters"
+                  value={pwdForm.newPassword}
+                  onChange={(e) => setPwdForm((f) => ({ ...f, newPassword: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm font-medium text-slate-700">Confirm New Password</label>
+                <input
+                  className="input-field"
+                  type="password"
+                  placeholder="••••••••"
+                  value={pwdForm.confirmPassword}
+                  onChange={(e) => setPwdForm((f) => ({ ...f, confirmPassword: e.target.value }))}
+                />
+              </div>
+              <div className="flex gap-2 pt-1">
+                <button
+                  onClick={() => { setShowChangePwd(false); setPwdForm({ currentPassword: '', newPassword: '', confirmPassword: '' }); }}
+                  className="btn-secondary flex-1 text-sm"
+                >
+                  Cancel
+                </button>
+                <button onClick={handleChangePassword} disabled={pwdSaving} className="btn-primary flex-1 text-sm">
+                  {pwdSaving ? 'Saving…' : 'Update Password'}
+                </button>
+              </div>
+            </div>
+          )}
+          {!showChangePwd && (
+            <p className="text-sm text-slate-400">Keep your account secure by using a strong, unique password.</p>
+          )}
         </section>
 
         {/* ── Saved Addresses (customers only) ─────────────────────────────── */}
