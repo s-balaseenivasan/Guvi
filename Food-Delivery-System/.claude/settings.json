@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -Command \"Get-Content ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\package.json''\")",
+      "Bash(powershell.exe -Command \"Get-Content ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\tailwindcss\\\\package.json'' | Select-String ''\"\"version\"\"''\")",
+      "Bash(powershell.exe -Command \"Test-Path ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\tailwindcss\\\\dist\\\\lib.js''; Test-Path ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\tailwindcss\\\\lib\\\\index.js''\")",
+      "Bash(powershell.exe -Command \"Get-Content ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\tailwindcss\\\\package.json''\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\vite\\\\dist\\\\node'' -Filter ''*tailwind*'' -ErrorAction SilentlyContinue | Select-Object Name; Get-ChildItem ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\vite'' -Recurse -Filter ''*tailwind*'' -ErrorAction SilentlyContinue | Select-Object FullName | head -5\")",
+      "Bash(powershell.exe -Command \"Get-Content ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\vite\\\\CHANGELOG.md'' | Select-Object -First 80\")",
+      "Bash(powershell.exe -Command \"Select-String -Path ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\vite\\\\dist\\\\node\\\\chunks\\\\dep-*.js'' -Pattern ''tailwind'' -SimpleMatch | Select-Object -First 3 | ForEach-Object { $_.Line.Substring\\(0, [Math]::Min\\(200, $_.Line.Length\\)\\) }\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\vite\\\\dist\\\\node'' | Select-Object Name\")",
+      "Bash(powershell.exe -Command \"sls ''PostCSS plugin has moved'' ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\vite\\\\dist\\\\node\\\\index.js'' | Select-Object -First 2\")",
+      "Bash(powershell.exe -Command \"sls ''PostCSS plugin has moved'' ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\tailwindcss\\\\lib\\\\index.js'' | Select-Object -First 2\")",
+      "Bash(powershell.exe -Command \"sls ''PostCSS plugin has moved'' ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules\\\\tailwindcss\\\\lib\\\\index.js''\")",
+      "Bash(echo \"exit: $?\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem ''c:\\\\Users\\\\balas\\\\Desktop\\\\New folder\\\\Food-Delivery-System\\\\FoodieHub\\\\node_modules'' -Recurse -Filter ''*.js'' -ErrorAction SilentlyContinue | Where-Object { $_.Length -lt 500KB } | Select-String ''PostCSS plugin has moved'' -ErrorAction SilentlyContinue | Select-Object -First 3 Path\")"
+    ]
+  }
+}
