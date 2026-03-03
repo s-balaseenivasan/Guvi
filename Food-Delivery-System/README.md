@@ -36,6 +36,7 @@ Food-Delivery-System/
 │   │   ├── Payment.js
 │   │   └── Review.js
 │   ├── routes/               # API routes
+│   ├── seed-admin.js         # Creates the first admin user
 │   ├── seed-restaurants.js   # Database seeder (27 restaurants + 163 menu items)
 │   ├── server.js
 │   └── .env                  # Environment variables (not committed)
@@ -157,12 +158,20 @@ VITE_RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxxxx
 
 ### 4. Seed the database
 
+**Restaurants & menu items:**
 ```bash
 cd backend
 node seed-restaurants.js
 ```
 
 This seeds **27 restaurants** across 15+ Indian and international cuisines with **163 menu items**, all with Unsplash food images.
+
+**Admin user:**
+```bash
+node seed-admin.js
+```
+
+Creates the first admin account (email: `admin@foodiehub.com`, password: `Admin@123`). Admin accounts cannot be created through the registration page.
 
 ### 5. Run the application
 
@@ -189,11 +198,13 @@ After seeding, use these credentials:
 
 | Role | Email | Password |
 |------|-------|----------|
+| Admin | `admin@foodiehub.com` | `Admin@123` |
 | Restaurant | `spicegarden@demo.com` | `Rest@123` |
 | Restaurant | `biryaniking@demo.com` | `Rest@123` |
 | Restaurant | `pizzapiazza@demo.com` | `Rest@123` |
 
-To create a **customer** or **admin** account, register at `/register`.
+To create a **customer** or **restaurant** account, register at `/register`.
+To create an **admin** account, run `node seed-admin.js` in the backend directory.
 
 ---
 
