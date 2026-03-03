@@ -233,6 +233,15 @@ To create an **admin** account, run `node seed-admin.js` in the backend director
 
 ---
 
+# UPI Payment Testing Scenarios
+
+Use the following UPI IDs to simulate different payment outcomes while testing:
+
+| Scenario   | UPI ID to Use    |
+|------------|------------------|
+| ✅ Success | success@razorpay |
+| ❌ Failure | failure@razorpay |
+
 ## Author
 
 **BALASEENIVASAN S**
